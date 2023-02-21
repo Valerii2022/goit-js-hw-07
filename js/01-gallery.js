@@ -24,31 +24,33 @@ const imageMarkup = galleryItems
 
 galleryRef.insertAdjacentHTML("beforeend", imageMarkup);
 
-
 function onImagePreviewClick(event) {
   event.preventDefault();
-  
+  window.addEventListener("keyup", onEscapeKeyCloseModal);
+
   if (event.target.nodeName !== "IMG") {
     return;
   }
 
-  basicLightbox.create(`<img src=${event.target.dataset.source} alt = "${event.target.alt}"/>`).show();
+  const modalCreate = basicLightbox.create(
+    `<img src=${event.target.dataset.source} alt = "${event.target.alt}"/>`
+  );
 
+  modalCreate.show();
+
+  function onEscapeKeyCloseModal(event) {
+    if (event.code === "Escape") {
+      console.log("hi");
+      modalCreate.close();
+      removeEventListenerFromWindow();
+    }
+  }
+
+  function removeEventListenerFromWindow() {
+    window.removeEventListener("keyup", onEscapeKeyCloseModal);
+  }
+
+  const basicLightboxRef = document.querySelector(".basicLightbox");
+
+  basicLightboxRef.addEventListener("click", removeEventListenerFromWindow);
 }
-
-
- 
-// ----------------------------------------------------------------------------
-// function OnKeyPress(event) {
-//     window.addEventListener('keyup', OnEscapeKeyPress)
-// }
-
-// function OnEscapeKeyPress(event) {
-//     if(event.code === 'Escape')
-//   {
-//     const modal = document.querySelector('.basicLightbox')
-//     console.log(modal)
-//     modal.classList.remove('basicLightbox--visible')
-//     window.removeEventListener('keyup', OnEscapeKeyPress)
-//     }
-//   }
