@@ -29,11 +29,11 @@ let modalCreate;
 function onImagePreviewClick(event) {
   event.preventDefault();
 
-  window.addEventListener("keyup", onEscapeKeyCloseModal);
-
   if (event.target.nodeName !== "IMG") {
     return;
   }
+
+  window.addEventListener("keyup", onEscapeKeyCloseModal);
 
   modalCreate = basicLightbox.create(
     `<img src=${event.target.dataset.source} alt = "${event.target.alt}"/>`
