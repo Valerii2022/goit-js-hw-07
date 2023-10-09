@@ -1,4 +1,4 @@
-# goit-js-finalproject
+# goit-js-hw-07
 
 Two options for viewing the picture gallery have been created.
 
